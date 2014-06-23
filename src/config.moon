@@ -5,16 +5,16 @@ export DEBUG = 2
 export DEBUG_FPS = true
 
 -- dump memory info every 10 seconds
-export DEBUG_MEM = false
+export DEBUG_MEM = true
 
 -- load deprecated API
-export LOAD_DEPRECATED_API = false
+--export LOAD_DEPRECATED_API = false
 
 -- load shortcodes API
-export LOAD_SHORTCODES_API = true
+--export LOAD_SHORTCODES_API = true
 
 -- screen orientation
-export CONFIG_SCREEN_ORIENTATION = "portrait"
+--export CONFIG_SCREEN_ORIENTATION = "portrait"
 
 -- design resolution
 export CONFIG_SCREEN_WIDTH  = 640

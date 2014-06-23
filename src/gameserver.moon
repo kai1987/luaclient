@@ -4,7 +4,6 @@
 
 cc.utils = require "framework.cc.utils.init"
 cc.net = require "framework.cc.net.init"
-SocketTCP = cc.net.SocketTCP
 
 
 onStatus=(__event)->
@@ -33,12 +32,14 @@ class GameServer
     @_port = port
 
     printInfo "gameserver:login:host:#{host},port:#{port},playerId:#{playerId},token:#{token}"
-    sock = SocketTCP.new host,port,false
-    sock\addEventListener(SocketTCP.EVENT_CONNECTED,self.onConnected)
-    sock\addEventListener(SocketTCP.EVENT_CLOSE,onStatus)
-    sock\addEventListener(SocketTCP.EVENT_CLOSED,onStatus)
-    sock\addEventListener(SocketTCP.EVENT_CONNECT_FAILURE,onStatus)
-    sock\addEventListener(SocketTCP.EVENT_DATA,onData)
+    sock = cc.net.SocketTCP.new host,port,false
+    dump(self)
+    sock\addEventListener(cc.net.SocketTCP.EVENT_CONNECTED,handler(self,self.onConnected))
+    sock\addEventListener(cc.net.SocketTCP.EVENT_CLOSE,handler(self,onStatus))
+    sock\addEventListener(cc.net.SocketTCP.EVENT_CLOSED,handler(self,onStatus))
+    sock\addEventListener(cc.net.SocketTCP.EVENT_CONNECT_FAILURE,handler(self,onStatus))
+    sock\addEventListener(cc.net.SocketTCP.EVENT_DATA,handler(self,onData))
+    sock\connect()
     return
 
 printInfo "hello lua socket"
